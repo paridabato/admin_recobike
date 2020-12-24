@@ -1,23 +1,13 @@
 <?php
 
 
-namespace App\Type;
+namespace App\Form;
 
-use App\Entity\Proprietaires;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ButtonType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\TelType;
-use Symfony\Component\Form\Extension\Core\Type\ResetType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvents;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 
 
@@ -117,12 +107,4 @@ class ProprietairesType extends AbstractType
             ])
         ;
     }
-
-    public function configureOptions(OptionsResolver $options)
-    {
-        $options->setDefaults([
-            'data_class' => 'App\Entity\Proprietaires',
-        ]);
-    }
-
 }
