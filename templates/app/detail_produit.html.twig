@@ -1,30 +1,12 @@
 {% extends 'base.html.twig' %}
-{% block title %}RECOBIKE | COMMANDE{% endblock %}
-{% block am_pagetitle %}
-  COMMANDE N° {{ commande.getId }} DU {{ commande.getDate.format('d/m/Y') }} ({{ commande.getIdMagasin.getRaisonSociale }})
-{% endblock %}
+{% block title %}RECOBIKE | PRODUIT{% endblock %}
+{% block am_pagetitle %}PRODUIT{% endblock %}
 {% block am_pagebody %}
-  <div class="card pd-20 pd-sm-40">
-    <h6>Détails de la commande</h6>
-    <table id="datatable1" class="table display responsive nowrap">
-      <thead>
-        <tr>
-          <th class="wd-50p">Libellé produit</th>
-          <th class="wd-10p">Quantité</th>
-          <th class="wd-20p">Prix unitaire</th>
-          <th class="wd-20p">Prix total</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for lignes in commandes_lignes %}
-          <tr>
-            <td>{{ lignes.id_produit }}</td>
-            <td>{{ lignes.quantite }}</td>
-            <td>{{ lignes.prix_unitaire }} €</td>
-            <td>{{ lignes.prix_total }} €</td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div><!-- card -->
+  <div class="row row-sm mg-t-20">
+    <div class="col-xl-12">
+      <div class="card pd-20 pd-sm-40 form-layout form-layout-4">
+        {{ form(form) }}
+      </div><!-- card -->
+    </div><!-- col-6 -->
+  </div><!-- row -->
 {% endblock %}

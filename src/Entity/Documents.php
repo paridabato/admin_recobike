@@ -15,7 +15,7 @@ class Documents
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private $id_document;
 
     /**
      * @ORM\Column(type="integer")
@@ -34,7 +34,7 @@ class Documents
 
     public function getId(): ?int
     {
-        return $this->id;
+        return $this->id_document;
     }
 
     public function getIdMarquage(): ?int

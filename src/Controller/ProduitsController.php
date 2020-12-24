@@ -5,37 +5,36 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Commandes;
+use App\Entity\Produits;
+use App\Form\ProduitsType;
 
 
 
-class CommandesController extends AbstractController
+class ProduitsController extends AbstractController
 {
     /**
-     * @Route("/commande", name="commandes")
+     * @Route("/produit", name="produits")
      */
-    public function index(){
-        $repositoryCommandes = $this->getDoctrine()->getRepository('App:Commandes');
-        $commandes = $repositoryCommandes->findAll();
+    public function produits(){
+        $repositoryProduits = $this->getDoctrine()->getRepository('App:Produits');
+        $produits = $repositoryProduits->findAll();
 
-        return $this->render('app/commandes.html.twig', array(
-            'commandes' => $commandes
+        return $this->render('app/produits.html.twig', array(
+            'produits' => $produits
         ));
     }
 
     /**
-     * @Route("/commande/{id}", name="commande")
+     * @Route("/produit/{id}", name="produit_id")
      */
-    public function commande($id){
-        $repositoryCommandesLignes = $this->getDoctrine()->getRepository('App:CommandesLignes');
-        $repositoryCommandes = $this->getDoctrine()->getRepository('App:Commandes');
+    public function produit($id){
+        $repositoryProduits = $this->getDoctrine()->getRepository('App:Produits');
+        $produit = $repositoryProduits->find($id);
 
-        $commandes_lignes = $repositoryCommandesLignes->findBy(array('id_commande' => $id));
-        $commande = $repositoryCommandes->find($id);
+        $creerproduit = $this->createForm(ProduitsType::class, $produit);
 
-        return $this->render('app/detail_commande.html.twig', array(
-            'commandes_lignes' => $commandes_lignes,
-            'commande' => $commande
+        return $this->render('app/detail_produit.html.twig', array(
+            'form' => $creerproduit->createView(),
         ));
     }
 }

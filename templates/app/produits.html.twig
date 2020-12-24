@@ -1,29 +1,29 @@
 {% extends 'base.html.twig' %}
-{% block title %}RECOBIKE | LISTE DES COMMANDES{% endblock %}
-{% block am_pagetitle %}LISTE DES COMMANDES{% endblock %}
+{% block title %}RECOBIKE | LISTE DES PRODUITS{% endblock %}
+{% block am_pagetitle %}LISTE DES PRODUITS{% endblock %}
 {% block am_pagebody %}
   <div class="card pd-20 pd-sm-40">
     <div class="table-wrapper">
       <table id="datatable1" class="table display responsive nowrap">
         <thead>
           <tr>
-            <th class="wd-15p">Numéro commande</th>
-            <th class="wd-15p">Date</th>
-            <th class="wd-15p">Statut</th>
-            <th class="wd-20p">Magasin</th>
-            <th class="wd-15p">Facture</th>
+            <th class="wd-15p">Id produit</th>
+            <th class="wd-15p">Image</th>
+            <th class="wd-15p">Reference</th>
+            <th class="wd-20p">Libelle</th>
+            <th class="wd-15p">Tarif_public</th>
             <th class="wd-15p">Details</th>
           </tr>
         </thead>
         <tbody>
-          {% for commande in commandes %}
+          {% for produit in produits %}
             <tr>
-              <td>{{ commande.getNumeroCommande }}</td>
-              <td>{{ commande.getDate.format('d/m/Y') }}</td>
-              <td>{{ commande.getStatut }}</td>
-              <td>{{ commande.getIdMagasin.getRaisonSociale }}</td>
-              <td>{{ commande.getFacture }}</td>
-              <td align="center"><a href="{{ path('commande', {id: commande.getId}) }}"><i class="fa fa-camera"></a></td>
+              <td>{{ produit.getId }}</td>
+              <td>{{ produit.getImage }}</td>
+              <td>{{ produit.getReference }}</td>
+              <td>{{ produit.getLibelle }}</td>
+              <td>{{ produit.getTarifPublic }}</td>
+              <td align="center"><a href="{{ path('produit_id', {id: produit.getId}) }}"><i class="fa fa-camera"></a></td>
             </tr>
           {% endfor %}
         </tbody>
