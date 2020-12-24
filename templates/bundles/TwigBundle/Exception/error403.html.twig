@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recobike | Administration{% endblock %}
+{% block am_sideleft %}{% endblock %}
+{% block am_header %}{% endblock %}
+{% block body %}
+    <div class="am-signin-wrapper">
+        <div class="am-signin-box">
+            <div class="row no-gutters">
+                <div class="col-lg-12"></div>
+                <div class="col-lg-12">
+                    <p align="center"><img src="{{ asset('/assets/img/logo.png') }}"><br>ESPACE DEDIÉ AUX CENTRES AGRÉÉS</p><br><br>
+                    <img class="w-100" src="{{ asset('/assets/img/pic4225683.png') }}">
+                    <p>
+                        The requested page couldn't be located. Checkout for any URL
+                        misspelling or <a href="{{ path('index') }}">return to the homepage</a>.
+                    </p>
+                </div><!-- col-7 -->
+            </div><!-- row -->
+            <p class="tx-center tx-white-5 tx-12 mg-t-15">Copyright &copy; 2021. Tous droits réservés RECOBIKE</p>
+        </div><!-- signin-box -->
+    </div><!-- am-signin-wrapper -->
+{% endblock %}
