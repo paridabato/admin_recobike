@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\FormBuilder;
 use App\Entity\Marquages;
+use App\Entity\Statuts;
 use App\Form\MarquagesType;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -43,9 +44,7 @@ class MarquagesController extends AbstractController
                 }
                 else{
                     $em = $this->getDoctrine()->getManager();
-                    $repositoryMagasins = $this->getDoctrine()->getRepository('App:Magasins');
-                    $repositorydGrossistes = $this->getDoctrine()->getRepository('App:Grossistes');
-                    $repositorydFabriquants = $this->getDoctrine()->getRepository('App:Fabriquants');
+                    $repositoryStatuts = $this->getDoctrine()->getRepository('App:Statuts');
 
                     $spreadsheet = IOFactory::load($creermarquagesFile);
                     $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
@@ -62,25 +61,16 @@ class MarquagesController extends AbstractController
                         $marquages = new Marquages();
                         $marquages->setSource((string)$row['A']);
                         $marquages->setNumero((string)$row['B']);
-                        if(!is_null($row['C'])){
-                            $is_grossistes = $repositorydGrossistes->find($row['E']);
-                            if(!is_null($is_grossistes))
-                                $marquages->setIdGrossiste($is_grossistes);
+                        $marquages->setTypeEngin($row['C']);
+                        $marquages->setMarque($row['D']);
+                        $marquages->setModele($row['E']);
+                        $marquages->setCouleur($row['F']);
+                        if(!is_null($row['G'])){
+                            $is_statuts = $repositoryStatuts->find($row['G']);
+                            if(!is_null($is_statuts))
+                                $marquages->setIdStatut($is_statuts);
                         }
-                        if(!is_null($row['D']))
-                            $is_fabriquants = $repositorydFabriquants->find($row['E']);
-                            if(!is_null($is_fabriquants))
-                                $marquages->setIdFabriquant($is_fabriquants);
-                        if(!is_null($row['E'])){
-                            $is_magasins = $repositoryMagasins->find($row['E']);
-                            if(!is_null($is_magasins))
-                                $marquages->setIdMagasin($is_magasins);
-                        }
-                        $marquages->setTypeEngin($row['F']);
-                        $marquages->setMarque($row['G']);
-                        $marquages->setModele($row['H']);
-                        $marquages->setCouleur($row['I']);
-                        $marquages->setNumSerieVelo($row['J']);
+                        $marquages->setNumSerieVelo($row['H']);
                         $em->persist($marquages);
                         $em->flush();
                     }
