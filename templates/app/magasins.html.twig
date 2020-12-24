@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recobike | LISTE DES MAGASINS{% endblock %}
+{% block am_pagetitle %}LISTE DES MAGASINS{% endblock %}
+{% block am_pagebody %}
+  <div class="card pd-20 pd-sm-40">
+    <div class="table-wrapper">
+      <table id="datatable1" class="table display nowrap">
+        <thead>
+          <tr>
+            <th class="wd-15p">Raison sociale</th>
+            <th class="wd-15p">Adresse postale</th>
+            <th class="wd-20p">CP</th>
+            <th class="wd-15p">Ville</th>
+            <th class="wd-15p">SIRET</th>
+            <th class="wd-15p">Contact</th>
+            <th class="wd-5p">Téléphone</th>
+            <th class="wd-5p">Statut</th>
+            <th class="wd-10p">Fiche</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for magasin in magasins %}
+            <tr>
+              <td>{{ magasin.getRaisonSociale }}</td>
+              <td>{{ magasin.getAdresse }}</td>
+              <td>{{ magasin.getCodePostal }}</td>
+              <td>{{ magasin.getVille }}</td>
+              <td>{{ magasin.getSiret }}</td>
+              <td>{{ magasin.getContact }}</td>
+              <td>{{ magasin.getTelephone }}</td>
+              <td align="center" {% if magasin.getStatut %}{% else %}class="text-danger" {% endif %}>{% if magasin.getStatut %}Actif{% else %}Pas actif{% endif %}</td>
+              <td align="center"><a href="{{ path('magasin_id', { id: magasin.getId }) }}"><i class="fa fa-camera"></a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div><!-- table-wrapper -->
+  </div><!-- card -->
+{% endblock %}

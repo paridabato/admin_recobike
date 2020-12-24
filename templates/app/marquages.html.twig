@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recobike | LISTE DES MARQUAGES{% endblock %}
+{% block am_pagetitle %}LISTE DES MARQUAGES{% endblock %}
+{% block am_pagebody %}
+    <div class="card pd-20 pd-sm-40">
+        <div class="table-wrapper">
+            <table id="datatable1" class="table display responsive nowrap">
+                <thead>
+                <tr>
+                  <th class="wd-10p">Marquage</th>
+                  <th class="wd-15p">Type engin</th>
+                  <th class="wd-15p">Marque</th>
+				  <th class="wd-15p">Modèle</th>
+				  <th class="wd-10p">SN</th>
+				  <th class="wd-10p">SN moteur</th>
+				  <th class="wd-10p">SN batterie</th>
+				  <th class="wd-10p">Statut</th>
+				  <th class="wd-5p">Fiche</th>
+                </tr>
+              </thead>
+                <tbody>
+                {% for marquage in marquages %}
+                    <tr>
+                        <td>{{ marquage.getNumero }}</td>
+                        <td>{{ marquage.getTypeEngin }}</td>
+                        <td>{{ marquage.getMarque }}</td>
+                        <td>{{ marquage.getModele }}</td>
+                        <td>{{ marquage.getNumSerieVelo }}</td>
+                        <td>{{ marquage.getNumSerieMoteur }}</td>
+                        <td>{{ marquage.getMumSerieBatterie }}</td>
+                        <td>{{ marquage.getIdStatut.getNomStatut }}</td>
+                        <td align="center"><a href="{{ path('views_marquages_id', {id:marquage.getIdMarquage}) }}"><i class="fa fa-camera"></a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div><!-- table-wrapper -->
+    </div><!-- card -->
+{% endblock %}

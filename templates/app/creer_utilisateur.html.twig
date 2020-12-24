@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recobike | CREER UN UTILISATEUR{% endblock %}
+{% block am_pagetitle %}CREER UN UTILISATEUR{% endblock %}
+{% block am_pagebody %}
+<div class="row row-sm mg-t-20">
+    <div class="col-xl-6">
+        <div class="card pd-20 pd-sm-40 form-layout form-layout-4">
+            {{ form_start(form) }}
+                {{ form_row(form.nom) }}
+                {{ form_row(form.prenom) }}
+                {{ form_row(form.email) }}
+                {{ form_row(form.login) }}
+                {{ form_row(form.roles) }}
+                <div class="form-layout-footer mg-t-30">
+                    <button type="submit" class="btn btn-info mg-r-5">Créer l'utilisateur</button>
+                    <button class="btn btn-secondary">Annuler</button>
+                </div><!-- form-layout-footer -->
+            {{ form_end(form) }}
+        </div><!-- row -->
+    </div><!-- card -->
+</div><!-- col-6 -->
+{% endblock %}
+{% block javascripts2 %}
+<script>
+    $(function(){
+        'use strict';
+        var context = $('div#utilisateurs_roles');
+        while( context.children('div:not(.row.w-100)' ).length){
+            context.children('div:not(.row.w-100):lt(3)').wrapAll('<div class="row w-100">');
+        }
+        $('#utilisateurs_roles .form-check').addClass('w-25');
+        $('#utilisateurs_roles .form-check label').addClass('ml-2');
+    });
+</script>
+{% endblock %}

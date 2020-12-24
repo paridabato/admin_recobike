@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recobike | KITS DE MARQUAGES{% endblock %}
+{% block am_pagetitle %}KITS DE MARQUAGES{% endblock %}
+{% block am_pagebody %}
+    <div class="card pd-20 pd-sm-40">
+        <div class="table-wrapper">
+            <table id="datatable1" class="table display responsive nowrap">
+                <thead>
+                    <tr>
+                        <th class="wd-20p">Numéro de départ</th>
+                        <th class="wd-20p">Numéro de fin</th>
+                        <th class="wd-15p">Grossiste</th>
+                        <th class="wd-15p">Fabriquant</th>
+                        <th class="wd-15p">Magasin</th>
+                        <th class="wd-15p">Numéro client</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for kit in kits %}
+                    <tr>
+                        <td>{{ kit.getNumDepart }}</td>
+                        <td>{{ kit.getNumFin }}</td>
+                        <td>{% if kit.getIdGrossiste is not null %}{{ kit.getIdGrossiste.getRaisonSociale }}{% endif %}</td>
+                        <td>{% if kit.getIdFabriquant is not null %}{{ kit.getIdFabriquant.getRaisonSociale }}{% endif %}</td>
+                        <td>{% if kit.getIdMagasin is not null %}{{ kit.getIdMagasin.getRaisonSociale }}{% endif %}</td>
+                        <td>{{ kit.getNumClient }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div><!-- table-wrapper -->
+    </div><!-- card -->
+{% endblock %}

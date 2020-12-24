@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recobike | LISTE DES UTILISATEURS{% endblock %}
+{% block am_pagetitle %}LISTE DES UTILISATEURS{% endblock %}
+{% block am_pagebody %}
+<div class="card pd-20 pd-sm-40">
+    <div class="table-wrapper">
+        <table id="datatable1" class="table display responsive nowrap">
+            <thead>
+            <tr>
+                <th class="wd-15p">Nom</th>
+                <th class="wd-15p">Prénom</th>
+                <th class="wd-20p">Email</th>
+                <th class="wd-15p">Login</th>
+                <th class="wd-15p">Réinit. Password</th>
+                <th class="wd-5p">Admin</th>
+                <th class="wd-5p">Détails</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for utilisateur in utilisateurs %}
+            <tr>
+                <td>{{ utilisateur.getNom }}</td>
+                <td>{{ utilisateur.getPrenom }}</td>
+                <td>{{ utilisateur.getEmail }}</td>
+                <td>{{ utilisateur.getLogin }}</td>
+                <td><a href="{{ path('reinitializer_utilisateur_id', {id:utilisateur.getId}) }}">réinitialiser</a></td>
+                <td>{% if is_granted('ROLE_superadmin') %}oui{% else %}non{% endif %}</td>
+                <td align="center"><a href="{{ path('edit_utilisateur_id', {id:utilisateur.getId}) }}"><i class="fa fa-camera"></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div><!-- table-wrapper -->
+</div><!-- card -->
+{% endblock %}

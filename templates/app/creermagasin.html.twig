@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recobike | CREER UN MAGASIN{% endblock %}
+{% block am_pagetitle %}CREER UN MAGASIN{% endblock %}
+{% block am_pagebody %}
+        <div class="row row-sm mg-t-20">
+          <div class="col-xl-12">
+            <div class="card pd-20 pd-sm-40 form-layout form-layout-4">
+              {{ form(form) }}
+            </div><!-- card -->
+          </div><!-- col-6 -->
+        </div><!-- row -->
+{% endblock %}
+{% block javascripts2 %}
+    <script>
+      $(function(){
+        'use strict';
+        $('.no_paste').on('paste', function (e) {
+          e.preventDefault();
+        })
+        $('#magasins_numero_client').on('change', function (e) {
+          if($("#magasins_numero_client input[type='radio']:checked").val() == '0'){
+            $('#magasins_num_client_recobike').removeAttr('required');
+            $('#magasins_num_client_recobike').closest('.row.mg-t-20').hide();
+          }
+          else {
+            $('#magasins_num_client_recobike').attr('required', 'required');
+            $('#magasins_num_client_recobike').closest('.row.mg-t-20').show();
+          }
+        })
+        $('form[name="magasins"]').on('submit', function (e) {
+          e.preventDefault();
+          $('form input').removeClass('is-invalid');
+          if($('#magasins_mobile').val() != $('#magasins_re_mobile').val()){
+            $('#magasins_re_mobile').addClass('is-invalid');
+          }
+          if($('#magasins_email').val() != $('#magasins_re_email').val()){
+            $('#magasins_re_email').addClass('is-invalid');
+          }
+          if($('#magasins_password').val() != $('#magasins_re_password').val()){
+            $('#magasins_re_password').addClass('is-invalid');
+          }
+          if(!$('form input.is-invalid').length){
+            this.submit();
+          }
+        })
+      });
+    </script>
+{% endblock %}

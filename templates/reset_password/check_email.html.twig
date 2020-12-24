@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recobike | Reset your password{% endblock %}
+{% block am_sideleft %}{% endblock %}
+{% block body %}
+    <div class="am-signin-wrapper">
+        <div class="am-signin-box">
+            <div class="row no-gutters">
+                <div class="col-lg-12"></div>
+                <div class="col-lg-12">
+                    <p align="center"><img src="{{ asset('/assets/img/logo.png') }}"><br>ESPACE DEDIÉ AUX CENTRES AGRÉÉS</p><br><br>
+                    <h5 class="tx-gray-800 mg-b-25">Email envoyé</h5>
+                    <p>Un email contenant un lien de réinitialisation vous a été envoyé. Le lien est valable {{ tokenLifetime|date('g') }} seulement.</p>
+                    <p>Si vous n’avez pas reçu l’email, veuillez vérifier votre courrier indésirable ou bien <a href="{{ path('app_forgot_password_request') }}">essayez à nouveau</a>.</p>
+                </div><!-- col-7 -->
+            </div><!-- row -->
+            <p class="tx-center tx-white-5 tx-12 mg-t-15">Copyright &copy; {{ "now"|date("Y") }}. Tous droits réservés RECOBIKE</p>
+        </div><!-- signin-box -->
+    </div><!-- am-signin-wrapper -->
+{% endblock %}

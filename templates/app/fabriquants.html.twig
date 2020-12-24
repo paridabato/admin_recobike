@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recobike | LISTE DES FABRIQUANTS{% endblock %}
+{% block am_pagetitle %}LISTE DES FABRIQUANTS{% endblock %}
+{% block am_pagebody %}
+    <div class="card pd-20 pd-sm-40">
+        <div class="table-wrapper">
+            <table id="datatable1" class="table display responsive nowrap">
+                <thead>
+                <tr>
+                    <th class="wd-15p">Raison sociale</th>
+                    <th class="wd-20p">Adresse postale</th>
+                    <th class="wd-5p">CP</th>
+                    <th class="wd-15p">Ville</th>
+                    <th class="wd-15p">Contact</th>
+                    <th class="wd-5p">Téléphone</th>
+                    <th class="wd-5p">Mobile</th>
+                    <th class="wd-15p">Email</th>
+                    <th class="wd-5p">Fiche</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for fabriquant in fabriquants %}
+                <tr>
+                    <td>{{ fabriquant.getRaisonSociale }}</td>
+                    <td>{{ fabriquant.getAdresse }}</td>
+                    <td>{{ fabriquant.getCodePostal }}</td>
+                    <td>{{ fabriquant.getVille }}</td>
+                    <td>{{ fabriquant.getContact }}</td>
+                    <td>{{ fabriquant.getTelephone }}</td>
+                    <td>{{ fabriquant.getMobile }}</td>
+                    <td align="center">{{ fabriquant.getEmail }}</td>
+                    <td align="center"><a href="{{ path('editfabriquants_id', {id:fabriquant.getId}) }}"><i class="fa fa-camera"></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div><!-- table-wrapper -->
+    </div><!-- card -->
+{% endblock %}

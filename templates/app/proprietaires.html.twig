@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recobike | LISTE DES PROPRIETAIRES{% endblock %}
+{% block am_pagetitle %}LISTE DES PROPRIETAIRES{% endblock %}
+{% block am_pagebody %}
+<div class="card pd-20 pd-sm-40">
+    <div class="table-wrapper">
+        <table id="datatable1" class="table display responsive nowrap">
+            <thead>
+            <tr>
+                <th class="wd-10p">Nom</th>
+                <th class="wd-10p">Prénom</th>
+                <th class="wd-10p">Raison sociale</th>
+                <th class="wd-20p">Adresse</th>
+                <th class="wd-5p">Code postal</th>
+                <th class="wd-15p">Ville</th>
+                <th class="wd-5p">Téléphone</th>
+                <th class="wd-5p">Mobile</th>
+                <th class="wd-15p">Email</th>
+                <th class="wd-5p">Détails</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for proprietaire in proprietaires %}
+            <tr>
+                <td>{{ proprietaire.getNom }}</td>
+                <td>{{ proprietaire.getPrenom }}</td>
+                <td>{{ proprietaire.getRaisonSociale }}</td>
+                <td>{{ proprietaire.getAdresse }}</td>
+                <td>{{ proprietaire.getCodePostal }}</td>
+                <td>{{ proprietaire.getVille }}</td>
+                <td>{{ proprietaire.getTelephone }}</td>
+                <td>{{ proprietaire.getMobile }}</td>
+                <td>{{ proprietaire.getEmail }}</td>
+                <td align="center"><a href="{{ path('proprietaire_id', { id:proprietaire.getId }) }}"><i class="fa fa-camera"></a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div><!-- table-wrapper -->
+</div><!-- card -->
+{% endblock %}
