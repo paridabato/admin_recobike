@@ -28,7 +28,6 @@ security:
                 path: app_logout
                 target: app_login
     access_control:
-        - { path: ^/utilisateur, role: ROLE_superadmin }
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/validation$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/reset-password, role: IS_AUTHENTICATED_ANONYMOUSLY }

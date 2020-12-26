@@ -18,7 +18,11 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mailer\Transport\TransportInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
+/**
+ * @Security("is_granted('ROLE_proprietaires') or is_granted('ROLE_superadmin')")
+ */
 class ProprietairesController extends AbstractController
 {
 

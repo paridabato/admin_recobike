@@ -25,7 +25,7 @@
                 <td>{{ utilisateur.getEmail }}</td>
                 <td>{{ utilisateur.getLogin }}</td>
                 <td><a href="{{ path('reinitializer_utilisateur_id', {id:utilisateur.getId}) }}">réinitialiser</a></td>
-                <td>{% if is_granted('ROLE_superadmin') %}oui{% else %}non{% endif %}</td>
+                <td>{% if 'ROLE_superadmin' in utilisateur.getRoles %}oui{% else %}non{% endif %}</td>
                 <td align="center"><a href="{{ path('edit_utilisateur_id', {id:utilisateur.getId}) }}"><i class="fa fa-camera"></td>
             </tr>
             {% endfor %}

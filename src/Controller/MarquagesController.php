@@ -13,8 +13,11 @@ use App\Entity\Marquages;
 use App\Entity\Statuts;
 use App\Form\MarquagesType;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
-
+/**
+ * @Security("is_granted('ROLE_marquages') or is_granted('ROLE_superadmin')")
+ */
 class MarquagesController extends AbstractController
 {
     /**
@@ -57,7 +60,12 @@ class MarquagesController extends AbstractController
                         $stmt->execute();
                     }
 
-                    foreach ($sheetData as $row){
+                    foreach ($sheetData as $k=>$row){
+                        if(count(array_diff($row, array('', NULL, false)))!= 8){
+                            $request->getSession()->getFlashBag()->add('warning', 'La ligne n° '.($k+1).' du fichier n\'est pas importée - toutes les données de la ligne sont obligatoires');
+                            continue;
+                        }
+
                         $marquages = new Marquages();
                         $marquages->setSource((string)$row['A']);
                         $marquages->setNumero((string)$row['B']);

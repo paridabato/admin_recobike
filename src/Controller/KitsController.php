@@ -10,7 +10,12 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Form\KitsType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
+
+/**
+ * @Security("is_granted('ROLE_kits') or is_granted('ROLE_superadmin')")
+ */
 class KitsController extends AbstractController
 {
     /**

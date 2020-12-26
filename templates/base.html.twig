@@ -54,52 +54,85 @@
                                     <span>ACCUEIL</span>
                                 </a>
                             </li><!-- nav-item -->
-                            <li class="nav-item">
-                                <a href="" class="nav-link with-sub">
-                                    <i class="icon ion-ios-list-outline"></i>
-                                    <span>MAGASINS</span>
-                                </a>
-                                <ul class="nav-sub">
-                                    <li class="nav-item"><a href="{{ path('magasins') }}" class="nav-link">Liste des magasins</a></li>
-                                    <li class="nav-item"><a href="{{ path('creermagasin') }}" class="nav-link">Créer un magasin</a></li>
-                                    <li class="nav-item"><a href="{{ path('commandes') }}" class="nav-link">Commandes</a></li>
-                                </ul>
-                            </li><!-- nav-item -->
+                            {% if is_granted('ROLE_magasins') or is_granted('ROLE_commandes') or is_granted('ROLE_superadmin') %}
+                                <li class="nav-item">
+                                    <a href="" class="nav-link with-sub">
+                                        <i class="icon ion-ios-list-outline"></i>
+                                        <span>MAGASINS</span>
+                                    </a>
+                                    <ul class="nav-sub">
+                                        {% if is_granted('ROLE_magasins') or is_granted('ROLE_superadmin') %}
+                                            <li class="nav-item"><a href="{{ path('magasins') }}" class="nav-link">Liste des magasins</a></li>
+                                            <li class="nav-item"><a href="{{ path('creermagasin') }}" class="nav-link">Créer un magasin</a></li>
+                                        {% endif %}
+                                        {% if is_granted('ROLE_commandes') or is_granted('ROLE_superadmin') %}
+                                            <li class="nav-item"><a href="{{ path('commandes') }}" class="nav-link">Commandes</a></li>
+                                        {% endif %}
+                                    </ul>
+                                </li><!-- nav-item -->
+                            {% endif %}
+                            {% if is_granted('ROLE_superadmin')
+                                or is_granted('ROLE_marquages')
+                                or is_granted('ROLE_kits')
+                                or is_granted('ROLE_marquages')
+                            %}
                             <li class="nav-item">
                                 <a href="" class="nav-link with-sub">
                                     <i class="icon ion-ios-list-outline"></i>
                                     <span>MARQUAGES</span>
                                 </a>
                                 <ul class="nav-sub">
-                                    <li class="nav-item"><a href="{{ path('marquages') }}" class="nav-link">Moteur de recherche</a></li>
-                                    <li class="nav-item"><a href="{{ path('kits') }}" class="nav-link">Kits de marquages</a></li>
-                                    <li class="nav-item"><a href="{{ path('creerkits') }}" class="nav-link">Créer un kit de marquages</a></li>
-                                    <li class="nav-item"><a href="{{ path('creermarquages') }}" class="nav-link">Créer des marquages</a></li>
+                                    {% if is_granted('ROLE_marquages') or is_granted('ROLE_superadmin') %}
+                                        <li class="nav-item"><a href="{{ path('marquages') }}" class="nav-link">Moteur de recherche</a></li>
+                                    {% endif %}
+                                    {% if is_granted('ROLE_kits') or is_granted('ROLE_superadmin') %}
+                                        <li class="nav-item"><a href="{{ path('kits') }}" class="nav-link">Kits de marquages</a></li>
+                                        <li class="nav-item"><a href="{{ path('creerkits') }}" class="nav-link">Créer un kit de marquages</a></li>
+                                    {% endif %}
+                                    {% if is_granted('ROLE_marquages') or is_granted('ROLE_superadmin') %}
+                                        <li class="nav-item"><a href="{{ path('creermarquages') }}" class="nav-link">Créer des marquages</a></li>
+                                    {% endif %}
                                 </ul>
                             </li><!-- nav-item -->
-                            <li class="nav-item">
-                                <a href="" class="nav-link with-sub">
-                                    <i class="icon ion-ios-list-outline"></i>
-                                    <span>PROPRIETAIRES</span>
-                                </a>
-                                <ul class="nav-sub">
-                                    <li class="nav-item"><a href="{{ path('proprietaires') }}" class="nav-link">Moteur de recherche</a></li>
-                                </ul>
-                            </li><!-- nav-item -->
-                            {% if is_granted('ROLE_superadmin') %}
+                            {% endif %}
+                            {% if is_granted('ROLE_proprietaires') or is_granted('ROLE_superadmin') %}
                                 <li class="nav-item">
+                                    <a href="" class="nav-link with-sub">
+                                        <i class="icon ion-ios-list-outline"></i>
+                                        <span>PROPRIETAIRES</span>
+                                    </a>
+                                    <ul class="nav-sub">
+                                        <li class="nav-item"><a href="{{ path('proprietaires') }}" class="nav-link">Moteur de recherche</a></li>
+                                    </ul>
+                                </li><!-- nav-item -->
+                            {% endif %}
+                            {% if is_granted('ROLE_superadmin')
+                                or is_granted('ROLE_admin')
+                                or is_granted('ROLE_produits')
+                                or is_granted('ROLE_fabriquants')
+                                or is_granted('ROLE_grossistes')
+                            %}
+                            <li class="nav-item">
                                     <a href="" class="nav-link with-sub">
                                         <i class="icon ion-ios-list-outline"></i>
                                         <span>ADMINISTRATION</span>
                                     </a>
                                     <ul class="nav-sub">
-                                        <li class="nav-item"><a href="{{ path('utilisateurs') }}" class="nav-link">Utilisateurs</a></li>
-                                        <li class="nav-item"><a href="{{ path('creer_utilisateur') }}" class="nav-link">Créer un utilisateur</a></li>
-                                        <li class="nav-item"><a href="{{ path('produits') }}" class="nav-link">Produits du catalogue</a></li>
-                                        <li class="nav-item"><a href="{{ path('fabriquants') }}" class="nav-link">Liste des fabriquants</a></li>
-                                        <li class="nav-item"><a href="{{ path('creerfabriquants') }}" class="nav-link">Ajouter un fabriquant</a></li>
-                                        <li class="nav-item"><a href="{{ path('grossistes') }}" class="nav-link">Liste des grossistes</a></li>
-                                        <li class="nav-item"><a href="{{ path('creergrossistes') }}" class="nav-link">Ajouter un grossiste</a></li>
+                                        {% if is_granted('ROLE_admin') or is_granted('ROLE_superadmin') %}
+                                            <li class="nav-item"><a href="{{ path('utilisateurs') }}" class="nav-link">Utilisateurs</a></li>
+                                            <li class="nav-item"><a href="{{ path('creer_utilisateur') }}" class="nav-link">Créer un utilisateur</a></li>
+                                        {% endif %}
+                                        {% if is_granted('ROLE_produits') or is_granted('ROLE_superadmin') %}
+                                            <li class="nav-item"><a href="{{ path('produits') }}" class="nav-link">Produits du catalogue</a></li>
+                                        {% endif %}
+                                        {% if is_granted('ROLE_fabriquants') or is_granted('ROLE_superadmin') %}
+                                            <li class="nav-item"><a href="{{ path('fabriquants') }}" class="nav-link">Liste des fabriquants</a></li>
+                                            <li class="nav-item"><a href="{{ path('creerfabriquants') }}" class="nav-link">Ajouter un fabriquant</a></li>
+                                        {% endif %}
+                                        {% if is_granted('ROLE_grossistes') or is_granted('ROLE_superadmin') %}
+                                            <li class="nav-item"><a href="{{ path('grossistes') }}" class="nav-link">Liste des grossistes</a></li>
+                                            <li class="nav-item"><a href="{{ path('creergrossistes') }}" class="nav-link">Ajouter un grossiste</a></li>
+                                        {% endif %}
                                     </ul>
                                 </li><!-- nav-item -->
                             {% endif %}

@@ -6,9 +6,11 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Commandes;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
-
-
+/**
+ * @Security("is_granted('ROLE_commandes') or is_granted('ROLE_superadmin')")
+ */
 class CommandesController extends AbstractController
 {
     /**

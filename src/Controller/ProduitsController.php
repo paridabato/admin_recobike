@@ -7,9 +7,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Produits;
 use App\Form\ProduitsType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
-
-
+/**
+ * @Security("is_granted('ROLE_produits') or is_granted('ROLE_superadmin')")
+ */
 class ProduitsController extends AbstractController
 {
     /**

@@ -3,7 +3,11 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use SymfonyCasts\Bundle\ResetPassword\Controller\ResetPasswordControllerTrait;
+use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
@@ -12,14 +16,11 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Utilisateurs;
 use App\Form\UtilisateursType;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mailer\Transport\TransportInterface;
 use SymfonyCasts\Bundle\ResetPassword\Exception\ResetPasswordExceptionInterface;
-use SymfonyCasts\Bundle\ResetPassword\Controller\ResetPasswordControllerTrait;
-use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
 
 class UtilisateursController extends AbstractController
 {
@@ -33,6 +34,7 @@ class UtilisateursController extends AbstractController
 
     /**
      * @Route("/utilisateur", name="utilisateurs")
+     * @Security("is_granted('ROLE_superadmin') or is_granted('ROLE_admin')")
      */
     public function proprietaires(Request $request){
         $repositoryUtilisateurs = $this->getDoctrine()->getRepository('App:Utilisateurs');
@@ -46,6 +48,7 @@ class UtilisateursController extends AbstractController
     /**
      * @Route("/utilisateur/creer", name="creer_utilisateur")
      * @Route("/utilisateur/edit/{id}", name="edit_utilisateur_id")
+     * @Security("is_granted('ROLE_superadmin') or is_granted('ROLE_admin')")
      */
     public function creerUtilisateur(Request $request, MailerInterface $mailer, UserPasswordEncoderInterface $encoder, $id = false){
         $repositoryUtilisateurs = $this->getDoctrine()->getRepository('App:Utilisateurs');
@@ -125,6 +128,7 @@ class UtilisateursController extends AbstractController
 
     /**
      * @Route("/utilisateur/reinitializer/{id}", name="reinitializer_utilisateur_id")
+     * @Security("is_granted('ROLE_superadmin') or is_granted('ROLE_admin')")
      */
     public function reinitializerUtilisateur($id, MailerInterface $mailer, Request $request){
         $user = $this->getDoctrine()->getRepository(Utilisateurs::class)->find($id);
